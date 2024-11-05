@@ -11,6 +11,12 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage("Logout", Icons.logout),
   ];
 
+  final List<Color> buttonColor = [
+    const Color.fromARGB(255, 82, 134, 23),
+    const Color.fromARGB(255, 60, 96, 19),
+    const Color.fromARGB(255, 182, 33, 33),
+  ];
+
   MyHomePage({super.key});
 
   @override
@@ -19,9 +25,8 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       // AppBar adalah bagian atas halaman yang menampilkan judul.
       appBar: AppBar(
-        // Judul aplikasi "Mental Health Tracker" dengan teks putih dan tebal.
         title: const Text(
-          'Mental Health Tracker',
+          'Tonopedia',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -60,7 +65,7 @@ class MyHomePage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
                     child: Text(
-                      'Welcome to Mental Health Tracker',
+                      'Tonopedia',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
@@ -69,20 +74,21 @@ class MyHomePage extends StatelessWidget {
                   ),
 
                   // Grid untuk menampilkan ItemCard dalam bentuk grid 3 kolom.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    // Agar grid menyesuaikan tinggi kontennya.
-                    shrinkWrap: true,
-
-                    // Menampilkan ItemCard untuk setiap item dalam list items.
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
-                  ),
+                  GridView.builder(
+                      primary: true,
+                      padding: const EdgeInsets.all(20),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      shrinkWrap: true,
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return ItemCard(
+                            item: items[index], color: buttonColor[index]);
+                      }),
                 ],
               ),
             ),
@@ -131,14 +137,15 @@ class ItemCard extends StatelessWidget {
   // Menampilkan kartu dengan ikon dan nama.
 
   final ItemHomepage item;
+  final Color color;
 
-  const ItemCard(this.item, {super.key});
+  const ItemCard({super.key, required this.item, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       // Menentukan warna latar belakang dari tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      color: color,
       // Membuat sudut kartu melengkung.
       borderRadius: BorderRadius.circular(12),
 
