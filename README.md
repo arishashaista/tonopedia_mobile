@@ -163,3 +163,43 @@
     Saya membuat sebuah drawer untuk mempermudah navigasi di dalam app. Metode navigasi yang saya gunakan dalam aplikasi ini adalah metode `Navigator.push` dan `Navigator.pop`. Metode `Navigator.push` digunakan untuk menambahkan halaman baru ke dalam stack navigasi. Dengan push, halaman baru ditempatkan di atas halaman sebelumnya, sehingga halaman tersebut akan menjadi halaman aktif yang dilihat oleh pengguna. Halaman sebelumnya tetap ada di dalam stack, sehingga pengguna dapat kembali ke sana jika diperlukan.
 
     Sebaliknya, metode `Navigator.pop` digunakan untuk kembali ke halaman sebelumnya dalam stack. Ketika pop dipanggil, Flutter menghapus halaman aktif dari stack dan kembali ke halaman sebelumnya. Hal ini berguna dalam situasi di mana pengguna telah menyelesaikan suatu interaksi pada halaman saat ini dan ingin kembali.
+
+## Tugas 9 PBP 2024/2025
+1. **Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?**
+
+    **Jawab:**
+    
+    Membuat model untuk melakukan pengambilan data atau pengiriman data JSON diperlukan untuk menjaga struktur data dan integritas aplikasi, seperti validasi data, meningkatkan keamanan, meningkatkan maintanability, dan serialisasi maupun deserialisasi.
+
+    Selain itu, tidak wajib untuk membuat model aplikasi terlebih dahulu. Namun, aplikasi menjadi lebih rentan terhadap kesalahan dan lebih sulit untuk dikelola.
+
+2. **Jelaskan fungsi dari library `http` yang sudah kamu implementasikan pada tugas ini**
+
+    **Jawab:**
+
+    Pada tugas ini, library `http` berfungsi sebagai alat untuk mengambil data dari server Django yang berisi informasi produk dalam bentuk JSON. Adapun fungsi utama library `http` yaitu, melakukan permintaan (HTTP Requests), mengambil data dari API, dan mengirimkan data ke server.
+
+3. **Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.**
+
+    **Jawab:**
+   
+    CookieRequest digunakan untuk mengelola cookie dalam HTTP, dimana cookie adalah mekanisme untuk menyimpan data di sisi klien yang dikirimkan ke server pada setiap permintaan HTTP, seperti mengelola otentikasi, menyederhanakan HTTP Request, dan mendukung stateful request.
+
+    Instance CookieRequest harus dibagikan ke semua komponen untuk konsistensi status login, menghindari redudansi, dan mengintegrasikan data global.
+
+4. **Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.**
+
+    **Jawab:**
+
+    Pengguna memasukkan data ke Flutter (dengan form atau button). Kemudian data dikirim ke server menggunakan `http` atau `CookieRequest` dalam format tertentu. Server Django akan menerima data request dan memprosesnya. Selanjutnya, Django mengembalikan respons dalam bentuk JSON dan flutter menerima respons dari server. Respons JSON dikonversi menjadi objek Dart dan data yang telah dikonversi akan ditampilkan dalam aplikasi.
+
+5. **Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.**
+
+    **Jawab:**
+    - **Login:** Pengguna memasukkan email dan password di Flutter kemudian data dikirim ke endpoint login Django menggunakan `CookieRequest`. Django akan memverifikasi kredensial pengguna, jika berhasil maka server akan mengembalikan cookie otentikasi. Cookie disimpan di `CookieRequest` untuk digunakan pada request berikutnya. Setelah login berhasil, menu utama akan ditampilkan sesuai dengan status login.
+
+    - **Register**: Pengguna memasukkan informasi akun yang akan didaftarkan. Data dikirim ke endpoint register Django menggunakan `http` atau `CookieRequest`. Django menyimpan data pengguna baru ke database dan Django mengembalikan respons. Flutter akan menampilkan pesan sukses atau error berdasarkan respons.
+
+    - **Logout**: Flutter mengirimkan request ke endpoint logout Django menggunakan `CookieRequest`. Django menghapus session pengguna dan Flutter memperbarui status pengguna menjadi tidak login serta pengguna diarahkan kembali ke halaman login.
+
+6. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).**

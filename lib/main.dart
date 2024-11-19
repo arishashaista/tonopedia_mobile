@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tonopedia_mobile/screens/menu.dart';
+import 'package:provider/provider.dart';
+import 'package:tonopedia_mobile/screens/login.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,14 +12,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'Tonopedia',
         theme: ThemeData(
+          useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.lightGreen,
           ).copyWith(secondary: Colors.lightGreen[900]),
-          useMaterial3: true,
         ),
-        home: MyHomePage());
+        home: const LoginPage(),
+      ),
+    );
   }
 }
