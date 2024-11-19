@@ -203,3 +203,11 @@
     - **Logout**: Flutter mengirimkan request ke endpoint logout Django menggunakan `CookieRequest`. Django menghapus session pengguna dan Flutter memperbarui status pengguna menjadi tidak login serta pengguna diarahkan kembali ke halaman login.
 
 6. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).**
+
+    **Jawab:**
+
+    - Mengintegrasikan autentikasi proyek Django dan Flutter.
+    - Membuat model kustom yang menyesuaikan dengan data JSON.
+    - Menerapkan fetch data dari Django untuk ditampilkan ke Flutter.
+    - Mengintegrasikan form Flutter dengan Django.
+    - Mengimplementasikan fitur Logout.
